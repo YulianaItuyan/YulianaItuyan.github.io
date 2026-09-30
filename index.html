@@ -1,0 +1,435 @@
+<!doctype html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Yuliana Ituyan Angulo</title>
+<meta name="description" content="Mechatronics Engineering student working on embedded computer vision and AI for human well-being. Poster at the WiML Workshop, NeurIPS 2026.">
+<style>
+  :root {
+    --bg: #fff9fb;
+    --surface: #ffffff;
+    --text: #2a2233;
+    --muted: #6a6076;
+    --line: #f0dde6;
+    --pink: #e0508f;
+    --pink-soft: #ffe6f0;
+    --aqua: #12a596;
+    --aqua-soft: #d6f5f0;
+    --grad: linear-gradient(135deg, #f26aa6 0%, #e0508f 40%, #19b8a8 100%);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #17131c;
+      --surface: #211b29;
+      --text: #f3eef7;
+      --muted: #b1a8bd;
+      --line: #382f43;
+      --pink: #ff7fb3;
+      --pink-soft: #3a2131;
+      --aqua: #4fdccb;
+      --aqua-soft: #173a37;
+      --grad: linear-gradient(135deg, #ff86b8 0%, #ff7fb3 40%, #4fdccb 100%);
+    }
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.7; font-size: 17px; overflow-x: hidden;
+  }
+  a { color: var(--pink); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  html[data-lang="en"] [lang="es"] { display: none !important; }
+  html[data-lang="es"] [lang="en"] { display: none !important; }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 0 20px; position: relative; z-index: 1; }
+
+  /* floating background blobs */
+  .blob { position: fixed; border-radius: 50%; filter: blur(70px); opacity: .45; z-index: 0; pointer-events: none; animation: drift 18s ease-in-out infinite alternate; }
+  .b1 { width: 380px; height: 380px; background: #ffb3d1; top: -80px; left: -100px; }
+  .b2 { width: 340px; height: 340px; background: #9be8dd; top: 40%; right: -120px; animation-duration: 22s; }
+  .b3 { width: 300px; height: 300px; background: #ffd0e2; bottom: -100px; left: 20%; animation-duration: 26s; }
+  @media (prefers-color-scheme: dark) { .blob { opacity: .18; } }
+  @keyframes drift { from { transform: translate(0,0) scale(1); } to { transform: translate(40px,30px) scale(1.12); } }
+
+  /* top bar */
+  .bar { position: sticky; top: 0; z-index: 20; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+  .bar .wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px; height: 56px; }
+  nav { display: flex; gap: 2px; overflow-x: auto; scrollbar-width: none; }
+  nav::-webkit-scrollbar { display: none; }
+  nav a { color: var(--muted); padding: 6px 11px; border-radius: 999px; font-size: 15px; white-space: nowrap; transition: background .2s, color .2s; }
+  nav a:hover { background: var(--pink-soft); color: var(--pink); text-decoration: none; }
+  .lang { display: flex; border: 1px solid var(--line); border-radius: 999px; overflow: hidden; flex: none; background: var(--surface); }
+  .lang button { border: 0; background: transparent; color: var(--muted); padding: 5px 12px; font: inherit; font-size: 14px; cursor: pointer; transition: background .2s; }
+  html[data-lang="en"] .lang button[data-set="en"], html[data-lang="es"] .lang button[data-set="es"] { background: var(--grad); color: #fff; }
+
+  /* hero */
+  header.hero { padding: 54px 0 20px; }
+  .hero-grid { display: grid; grid-template-columns: 200px 1fr; gap: 36px; align-items: center; }
+  .photo-wrap { position: relative; width: 200px; height: 200px; }
+  .photo-wrap::before {
+    content: ""; position: absolute; inset: -8px; background: var(--grad);
+    border-radius: 42% 58% 55% 45% / 48% 42% 58% 52%; animation: morph 9s ease-in-out infinite; opacity: .9;
+  }
+  .photo { position: relative; width: 200px; height: 200px; border-radius: 50%; object-fit: cover; border: 5px solid var(--surface); display: block; }
+  @keyframes morph {
+    0%,100% { border-radius: 42% 58% 55% 45% / 48% 42% 58% 52%; transform: rotate(0deg); }
+    50% { border-radius: 58% 42% 45% 55% / 52% 58% 42% 48%; transform: rotate(12deg); }
+  }
+  .hello { color: var(--aqua); font-weight: 600; margin: 0 0 4px; font-size: 1.05rem; }
+  .wave { display: inline-block; transform-origin: 70% 70%; animation: wave 2.6s ease-in-out infinite; }
+  @keyframes wave { 0%,60%,100% { transform: rotate(0); } 10%,30% { transform: rotate(14deg); } 20%,40% { transform: rotate(-8deg); } 50% { transform: rotate(10deg); } }
+  h1 { font-size: 2.4rem; line-height: 1.15; margin: 0 0 8px; letter-spacing: -0.02em; background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .tag { color: var(--muted); margin: 0 0 6px; font-size: 1.05rem; }
+  .rotator { font-weight: 600; color: var(--pink); min-height: 1.7em; margin: 0 0 14px; }
+  .rotator .word { display: inline-block; animation: pop .5s ease; }
+  @keyframes pop { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+  .links { display: flex; flex-wrap: wrap; gap: 9px; }
+  .links a { border: 1px solid var(--line); background: var(--surface); color: var(--text); padding: 6px 15px; border-radius: 999px; font-size: 15px; transition: transform .2s, border-color .2s, box-shadow .2s; }
+  .links a:hover { transform: translateY(-2px); border-color: var(--pink); color: var(--pink); text-decoration: none; box-shadow: 0 6px 16px rgba(224,80,143,.15); }
+  .links a.primary { background: var(--grad); border-color: transparent; color: #fff; }
+  .links a.primary:hover { color: #fff; }
+
+  /* sections */
+  section { padding: 34px 0 6px; scroll-margin-top: 66px; }
+  h2 { font-size: 1.4rem; margin: 0 0 16px; display: flex; align-items: center; gap: 10px; }
+  h2::after { content: ""; flex: 1; height: 2px; border-radius: 2px; background: linear-gradient(90deg, var(--pink-soft), var(--aqua-soft), transparent); }
+  h3 { font-size: 1.05rem; margin: 0 0 2px; }
+  p { margin: 0 0 12px; }
+  .item { margin-bottom: 22px; }
+  .meta { color: var(--muted); font-size: .93rem; margin: 0 0 6px; }
+  ul { margin: 6px 0 0; padding-left: 20px; }
+  li { margin-bottom: 5px; }
+  li::marker { color: var(--pink); }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 16px 18px; transition: transform .25s, box-shadow .25s; }
+  .card:hover { transform: translateY(-4px); box-shadow: 0 12px 26px rgba(224,80,143,.13); }
+  .cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+  .card h3 { color: var(--pink); }
+  .card p { margin: 4px 0 0; font-size: .95rem; color: var(--muted); }
+  .cards.aqua .card h3 { color: var(--aqua); }
+  .badge { display: inline-block; font-size: .78rem; padding: 2px 10px; border-radius: 999px; background: var(--pink-soft); color: var(--pink); margin-right: 6px; font-weight: 600; }
+  .badge.aq { background: var(--aqua-soft); color: var(--aqua); }
+  .pub { background: var(--surface); border: 1px solid var(--line); border-left: 5px solid var(--pink); border-radius: 14px; padding: 16px 18px; }
+  .story { background: linear-gradient(135deg, var(--pink-soft), var(--aqua-soft)); border-radius: 20px; padding: 24px 26px; }
+  .story p:last-child { margin-bottom: 0; }
+  .quote { font-size: 1.12rem; font-weight: 600; margin-bottom: 12px; }
+  .skills { display: grid; grid-template-columns: 170px 1fr; gap: 6px 16px; margin-top: 8px; }
+  .skills dt { font-weight: 600; }
+  .skills dd { margin: 0; color: var(--muted); }
+  .pill-row { display: flex; flex-wrap: wrap; gap: 10px; margin: 6px 0 14px; }
+  .pill { background: var(--surface); border: 1px solid var(--line); padding: 7px 15px; border-radius: 999px; transition: transform .2s, background .2s; }
+  .pill:hover { transform: translateY(-3px) rotate(-1.5deg); background: var(--aqua-soft); }
+  .now li { list-style: none; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 10px 14px; margin-bottom: 9px; }
+  .now { padding-left: 0; }
+  .updated { color: var(--muted); font-size: .9rem; }
+  footer { margin: 44px 0 30px; padding-top: 16px; border-top: 1px solid var(--line); color: var(--muted); font-size: .9rem; text-align: center; }
+
+  /* photos */
+  .media { display: grid; grid-template-columns: 1fr 230px; gap: 22px; align-items: center; }
+  figure { margin: 0; }
+  .photo-card { position: relative; border-radius: 20px; padding: 5px; background: var(--grad); transition: transform .3s; }
+  .photo-card:hover { transform: rotate(-1.2deg) scale(1.02); }
+  .photo-card img { display: block; width: 100%; height: auto; border-radius: 16px; }
+  figcaption { color: var(--muted); font-size: .88rem; text-align: center; margin-top: 8px; }
+  .closing { text-align: center; padding-top: 40px; }
+  .closing .photo-card { max-width: 760px; margin: 0 auto; }
+  .closing p.thanks { font-size: 1.15rem; font-weight: 600; margin: 18px 0 0; color: var(--pink); }
+
+  /* reveal on scroll */
+  .js .reveal { opacity: 0; transform: translateY(22px); transition: opacity .7s ease, transform .7s ease; }
+  .js .reveal.in { opacity: 1; transform: none; }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+    .js .reveal { opacity: 1; transform: none; }
+    html { scroll-behavior: auto; }
+  }
+  @media (max-width: 640px) {
+    body { font-size: 16px; }
+    .hero-grid { grid-template-columns: 1fr; text-align: center; justify-items: center; gap: 22px; }
+    .links { justify-content: center; }
+    .cards { grid-template-columns: 1fr; }
+    .skills { grid-template-columns: 1fr; gap: 0; }
+    .skills dd { margin-bottom: 10px; }
+    h1 { font-size: 1.9rem; }
+    .story { padding: 20px; }
+    .media { grid-template-columns: 1fr; }
+    .media figure { max-width: 300px; margin: 0 auto; }
+  }
+</style>
+</head>
+<body>
+<div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
+
+<div class="bar">
+  <div class="wrap">
+    <nav aria-label="Sections">
+      <a href="#about"><span lang="en">About</span><span lang="es">Sobre mí</span></a>
+      <a href="#jazmin">Jazmín.IA</a>
+      <a href="#research"><span lang="en">Research</span><span lang="es">Investigación</span></a>
+      <a href="#publications"><span lang="en">Publications</span><span lang="es">Publicaciones</span></a>
+      <a href="#talks"><span lang="en">Talks &amp; Awards</span><span lang="es">Charlas y premios</span></a>
+      <a href="#beyond"><span lang="en">Beyond research</span><span lang="es">Más allá de la ciencia</span></a>
+      <a href="#now"><span lang="en">Right now</span><span lang="es">Ahora mismo</span></a>
+      <a href="#cv">CV</a>
+    </nav>
+    <div class="lang" role="group" aria-label="Language">
+      <button type="button" data-set="en">EN</button>
+      <button type="button" data-set="es">ES</button>
+    </div>
+  </div>
+</div>
+
+<main class="wrap">
+
+  <header class="hero">
+    <div class="hero-grid">
+      <div class="photo-wrap">
+        <img class="photo" src="assets/photo.jpg" alt="Portrait of Yuliana Ituyan Angulo" width="200" height="200">
+      </div>
+      <div>
+        <p class="hello"><span lang="en">Hi, I'm</span><span lang="es">Hola, soy</span> <span class="wave" aria-hidden="true">👋</span></p>
+        <h1>Yuliana Ituyan Angulo</h1>
+        <p class="tag">
+          <span lang="en">Mechatronics Engineering student · Embedded computer vision &amp; deep learning</span>
+          <span lang="es">Estudiante de Ingeniería Mecatrónica · Visión por computador embebida y aprendizaje profundo</span>
+        </p>
+        <p class="rotator" aria-live="off">
+          <span lang="en">I build AI that </span><span lang="es">Construyo IA que </span><span class="word" id="word"></span>
+        </p>
+        <div class="links">
+          <a class="primary" href="mailto:yulianaituyan@gmail.com">Email</a>
+          <a href="https://github.com/YulianaItuyan" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://www.linkedin.com/in/yuliana-ituyan" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="cv/CV_YulianaItuyan.pdf" target="_blank" rel="noopener">CV (PDF)</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section id="about" class="reveal">
+    <h2><span lang="en">About me</span><span lang="es">Sobre mí</span></h2>
+    <div lang="en">
+      <p>I am a Mechatronics Engineering student at Universidad Autónoma de Occidente in Cali, Colombia (expected graduation: October 2027), and a Software Analysis and Development Technologist from SENA.</p>
+      <p>Computer vision blew my mind the moment I started imagining everything it could do, especially for human well-being. I have always wanted to contribute something to the world, and I feel this tool is how I can do it. My research focuses on computer vision and deep learning for embedded, resource-constrained systems, and on accessible technology that connects AI with the real needs of people in Latin America.</p>
+      <p>I am a dreamer by nature, persistent, and creative. I love turning ideas into programs that work. Right now I am finishing my undergraduate thesis and preparing to pursue a research-based graduate degree in machine learning.</p>
+    </div>
+    <div lang="es">
+      <p>Soy estudiante de Ingeniería Mecatrónica en la Universidad Autónoma de Occidente en Cali, Colombia (graduación prevista: octubre de 2027), y Tecnóloga en Análisis y Desarrollo de Software del SENA.</p>
+      <p>La visión por computador me voló la cabeza desde que empecé a imaginar todo lo que se puede hacer con ella, sobre todo por el bienestar de las personas. Siempre he querido aportarle algo al mundo, y siento que esta herramienta es mi manera de hacerlo. Mi investigación se centra en la visión por computador y el aprendizaje profundo para sistemas embebidos con recursos limitados, y en una tecnología accesible que conecte la IA con las necesidades reales de la gente en Latinoamérica.</p>
+      <p>Soy soñadora por naturaleza, perseverante y creativa. Me encanta convertir ideas en programas que funcionan. Ahora estoy terminando mi tesis de pregrado y preparándome para cursar un posgrado de investigación en aprendizaje automático.</p>
+    </div>
+  </section>
+
+  <section id="jazmin" class="reveal">
+    <h2><span lang="en">Why “Jazmín.IA”?</span><span lang="es">¿Por qué “Jazmín.IA”?</span></h2>
+    <div class="story">
+      <div lang="en">
+        <p class="quote">Jazmín is my mother's name. 🌸</p>
+        <p>My thesis was born from something very personal: the people who watched over my well-being when I needed them most. My mother can tell how I am just by looking at my face. My loved ones and my closest professors noticed when I looked tired or stressed, and that care carried me through a very hard time in my life.</p>
+        <p>Jazmín.IA tries to pass that on to everyone who uses it: a system that looks out for you and gives you feedback, so you can improve your lifestyle and your well-being.</p>
+      </div>
+      <div lang="es">
+        <p class="quote">Jazmín es el nombre de mi mamá. 🌸</p>
+        <p>Mi tesis nació de algo muy personal: las personas que velaron por mi bienestar cuando más lo necesitaba. Mi mamá sabe cómo estoy con solo mirarme el rostro. Mis seres queridos y mis profesores más cercanos se daban cuenta cuando me veían cansada o estresada, y ese cuidado me sostuvo en una etapa muy difícil de mi vida.</p>
+        <p>Jazmín.IA busca transmitirle eso a todas las personas que la usen: un sistema que esté pendiente de ti y te dé retroalimentación, para que puedas mejorar tu estilo de vida y tu bienestar.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="research" class="reveal">
+    <h2><span lang="en">Research</span><span lang="es">Investigación</span></h2>
+    <div class="item">
+      <h3><span lang="en">Undergraduate thesis · Jazmín.IA</span><span lang="es">Tesis de pregrado · Jazmín.IA</span></h3>
+      <p class="meta">Universidad Autónoma de Occidente · 2026 – <span lang="en">present</span><span lang="es">actualidad</span></p>
+      <div lang="en">
+        <p><strong>Embedded computer vision system for the analysis of behavioral indicators and their relationship with user performance.</strong> The goal is to evaluate how facial behavioral patterns relate to a user's performance, through a system that supports the user's well-being.</p>
+        <ul>
+          <li>Video acquisition on an Arduino UNO Q (4 GB), with all facial data processed locally to protect privacy.</li>
+          <li>Facial patterns linked to attention, concentration and fatigue, extracted with computer vision (MediaPipe landmarks, Eye and Mouth Aspect Ratios, quantized TensorFlow Lite models) and microexpression recognition.</li>
+          <li>Objective performance measured in specific tasks (response time, accuracy, error rate), and analyzed against the facial patterns to produce adaptive feedback.</li>
+        </ul>
+      </div>
+      <div lang="es">
+        <p><strong>Sistema embebido de visión por computador para el análisis de indicadores conductuales y su relación con el rendimiento del usuario.</strong> El objetivo es evaluar cómo se relacionan los patrones conductuales faciales con el rendimiento de una persona, mediante un sistema que apoya su bienestar.</p>
+        <ul>
+          <li>Captura de video en una Arduino UNO Q (4 GB), con procesamiento local de los datos faciales para proteger la privacidad.</li>
+          <li>Patrones faciales asociados con atención, concentración y fatiga, extraídos con visión por computador (puntos faciales de MediaPipe, razones de aspecto de ojos y boca, modelos cuantizados de TensorFlow Lite) y reconocimiento de microexpresiones.</li>
+          <li>Rendimiento objetivo medido en tareas específicas (tiempo de respuesta, precisión, tasa de error) y analizado frente a los patrones faciales para generar retroalimentación adaptativa.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="cards">
+      <div class="card"><h3><span lang="en">Embedded computer vision</span><span lang="es">Visión embebida</span></h3><p><span lang="en">Vision models running on-device, under memory and power limits.</span><span lang="es">Modelos de visión que corren en el dispositivo, con límites de memoria y energía.</span></p></div>
+      <div class="card"><h3><span lang="en">Deep learning at the edge</span><span lang="es">Aprendizaje profundo en el borde</span></h3><p><span lang="en">Quantization and efficient inference with TensorFlow Lite.</span><span lang="es">Cuantización e inferencia eficiente con TensorFlow Lite.</span></p></div>
+      <div class="card"><h3><span lang="en">AI for human well-being</span><span lang="es">IA para el bienestar</span></h3><p><span lang="en">Non-invasive, privacy-preserving systems that support people while they work or study.</span><span lang="es">Sistemas no invasivos y que cuidan la privacidad, para apoyar a las personas mientras trabajan o estudian.</span></p></div>
+      <div class="card"><h3><span lang="en">Robotics</span><span lang="es">Robótica</span></h3><p><span lang="en">ROS-based autonomous systems, simulated in Gazebo and RViz.</span><span lang="es">Sistemas autónomos con ROS, simulados en Gazebo y RViz.</span></p></div>
+    </div>
+  </section>
+
+  <section id="publications" class="reveal">
+    <h2><span lang="en">Publications</span><span lang="es">Publicaciones</span></h2>
+    <div class="pub">
+      <span class="badge"><span lang="en">Poster</span><span lang="es">Póster</span></span>
+      <span class="badge aq">WiML @ NeurIPS 2026</span>
+      <p style="margin-top:9px"><strong>Jazmín.IA: Embedded Computer Vision System for the Analysis of Behavioral Indicators and Their Relationship with User Performance.</strong></p>
+      <p class="meta" style="margin:0">Yuliana Ituyan Angulo · Women in Machine Learning (WiML) Workshop, NeurIPS 2026</p>
+    </div>
+  </section>
+
+  <section id="talks" class="reveal">
+    <h2><span lang="en">Talks &amp; Awards</span><span lang="es">Charlas y premios</span></h2>
+    <div class="item">
+      <h3><span lang="en">Talks</span><span lang="es">Charlas</span></h3>
+      <ul>
+        <li><span lang="en"><strong>2025</strong> · Jornada de Investigación, Universidad Autónoma de Occidente: “Implementation of an unmanned autonomous aquatic robot for surface pool cleaning.”</span><span lang="es"><strong>2025</strong> · Jornada de Investigación, Universidad Autónoma de Occidente: “Implementación de un robot acuático autónomo no tripulado para limpieza superficial en piscinas.”</span></li>
+        <li><span lang="en"><strong>2024</strong> · Jornada de Investigación, Universidad Autónoma de Occidente: “Development of a drone transport model for medical supply distribution in rural areas of Colombia.”</span><span lang="es"><strong>2024</strong> · Jornada de Investigación, Universidad Autónoma de Occidente: “Desarrollo de un modelo de transporte con drones para la distribución de suministros médicos en zonas rurales de Colombia.”</span></li>
+      </ul>
+    </div>
+    <div class="item">
+      <h3><span lang="en">Awards &amp; recognitions</span><span lang="es">Premios y reconocimientos</span></h3>
+      <ul>
+        <li><span lang="en">Third place, Rally Latinoamericano de Innovación</span><span lang="es">Tercer lugar, Rally Latinoamericano de Innovación</span></li>
+        <li><span lang="en">Finalist, Todos a Salvo: Desafío Occidente (Channge and Colmena Seguros)</span><span lang="es">Finalista, Todos a Salvo: Desafío Occidente (Channge y Colmena Seguros)</span></li>
+        <li><span lang="en">Outstanding Teaching Performance Recognition, Kodland Latinoamérica (May 2026)</span><span lang="es">Reconocimiento al desempeño docente destacado, Kodland Latinoamérica (mayo de 2026)</span></li>
+      </ul>
+    </div>
+    <div class="item">
+      <h3><span lang="en">Training</span><span lang="es">Formación complementaria</span></h3>
+      <ul>
+        <li><span lang="en">9th Colombian HPC Summer School (2026): parallel and distributed programming, LLMs and agents, quantum computing.</span><span lang="es">9th Colombian HPC Summer School (2026): programación paralela y distribuida, LLMs y agentes, computación cuántica.</span></li>
+        <li><span lang="en">Certified Scrum Professional – ScrumMaster (CertiProf, 2025) · AI Immersion + Google Gemini (Alura, 2025)</span><span lang="es">Certified Scrum Professional – ScrumMaster (CertiProf, 2025) · Inmersión IA + Google Gemini (Alura, 2025)</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="experience" class="reveal">
+    <h2><span lang="en">Experience &amp; skills</span><span lang="es">Experiencia y habilidades</span></h2>
+    <div class="item">
+      <h3><span lang="en">Programming and Mathematics Tutor · Kodland Latinoamérica</span><span lang="es">Tutora de Programación y Matemáticas · Kodland Latinoamérica</span></h3>
+      <p class="meta">2025 – <span lang="en">present</span><span lang="es">actualidad</span></p>
+      <p><span lang="en">I teach programming (Scratch, Minecraft Education, Python) and mathematics to children from age 7 across Latin America, and manage several groups at once.</span><span lang="es">Enseño programación (Scratch, Minecraft Education, Python) y matemáticas a niños desde los 7 años en toda Latinoamérica, y manejo varios grupos a la vez.</span></p>
+    </div>
+    <div class="item media">
+      <div>
+        <h3><span lang="en">Robotics projects · Universidad Autónoma de Occidente</span><span lang="es">Proyectos de robótica · Universidad Autónoma de Occidente</span></h3>
+        <p><span lang="en">Led the programming area of an autonomous pool-cleaning robot: teleoperation, ROS implementation, simulation in RViz and Gazebo, and a trajectory-visualization interface using an ESP32-CAM.</span><span lang="es">Lideré el área de programación de un robot autónomo para limpieza de piscinas: teleoperación, implementación en ROS, simulación en RViz y Gazebo, e interfaz de visualización de trayectoria con una ESP32-CAM.</span></p>
+      </div>
+      <figure>
+        <div class="photo-card"><img src="assets/robot.jpg" alt="Yuliana holding the autonomous aquatic robot built by her team for pool cleaning" loading="lazy"></div>
+        <figcaption><span lang="en">Our autonomous aquatic robot</span><span lang="es">Nuestro robot acuático autónomo</span></figcaption>
+      </figure>
+    </div>
+    <dl class="skills">
+      <dt>AI / ML</dt><dd>Python, TensorFlow / Keras, TensorFlow Lite, Detectron2, CNNs, MediaPipe</dd>
+      <dt><span lang="en">Robotics &amp; embedded</span><span lang="es">Robótica y embebidos</span></dt><dd>Arduino, ROS 2 Humble, Gazebo, RViz, ESP32</dd>
+      <dt>Software</dt><dd>JavaScript, React, Angular, SQL, APIs, Git / GitHub</dd>
+      <dt><span lang="en">Languages</span><span lang="es">Idiomas</span></dt><dd><span lang="en">Spanish (native), English (B2), learning Mandarin</span><span lang="es">Español (nativo), inglés (B2), aprendiendo mandarín</span></dd>
+    </dl>
+  </section>
+
+  <section id="beyond" class="reveal">
+    <h2><span lang="en">Beyond research</span><span lang="es">Más allá de la ciencia</span></h2>
+    <div class="pill-row">
+      <span class="pill">🎨 <span lang="en">Drawing</span><span lang="es">Dibujar</span></span>
+      <span class="pill">💃 <span lang="en">Dancing</span><span lang="es">Bailar</span></span>
+      <span class="pill">🎮 <span lang="en">Video games</span><span lang="es">Videojuegos</span></span>
+      <span class="pill">📺 <span lang="en">TV series</span><span lang="es">Series</span></span>
+      <span class="pill">💻 <span lang="en">Turning ideas into code</span><span lang="es">Programar ideas y hacerlas realidad</span></span>
+      <span class="pill">🀄 <span lang="en">Mandarin</span><span lang="es">Mandarín</span></span>
+    </div>
+    <div lang="en">
+      <p>I am from Cali, Colombia, a city that dances, and I do a bit of everything. My parents taught me that I can do anything, and that is the message I want to pass on to my students and to everyone my research and classes can reach.</p>
+    </div>
+    <div lang="es">
+      <p>Soy de Cali, Colombia, una ciudad que baila, y me gusta hacer un poco de todo. Mis papás me enseñaron que todo lo puedo, y ese es el mensaje que quiero transmitirles a mis estudiantes y a todas las personas que mi investigación y mis clases puedan llegar a impactar.</p>
+    </div>
+  </section>
+
+  <section id="now" class="reveal">
+    <h2><span lang="en">Right now</span><span lang="es">Ahora mismo</span></h2>
+    <ul class="now">
+      <li><span lang="en">🔬 Working hard on my thesis to get measurable results.</span><span lang="es">🔬 Trabajando fuerte en mi tesis para lograr resultados medibles.</span></li>
+      <li><span lang="en">📚 Studying English for the TOEFL.</span><span lang="es">📚 Estudiando inglés para el TOEFL.</span></li>
+      <li><span lang="en">🀄 Taking Mandarin classes.</span><span lang="es">🀄 Tomando clases de mandarín.</span></li>
+      <li><span lang="en">🧠 Learning deep learning and machine learning, and coding every day.</span><span lang="es">🧠 Aprendiendo deep learning y machine learning, y programando todos los días.</span></li>
+    </ul>
+    <p class="updated"><span lang="en">Last updated: September 2026</span><span lang="es">Última actualización: septiembre de 2026</span></p>
+  </section>
+
+  <section id="cv" class="reveal">
+    <h2>CV</h2>
+    <p><span lang="en">The full curriculum vitae is available as a PDF.</span><span lang="es">El currículum completo está disponible en PDF.</span></p>
+    <div class="links">
+      <a class="primary" href="cv/CV_YulianaItuyan.pdf" target="_blank" rel="noopener"><span lang="en">Download CV (PDF)</span><span lang="es">Descargar CV (PDF)</span></a>
+      <a href="https://www.linkedin.com/in/yuliana-ituyan" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+  </section>
+
+  <section class="closing reveal" aria-label="Closing">
+    <figure>
+      <div class="photo-card"><img src="assets/casual.jpg" alt="Casual portrait of Yuliana smiling in front of festive lights" loading="lazy"></div>
+    </figure>
+    <p class="thanks"><span lang="en">Thanks for stopping by! Let's build something good together. 🌸</span><span lang="es">¡Gracias por pasar por aquí! Construyamos algo bueno juntos. 🌸</span></p>
+  </section>
+
+  <footer>© <span id="year">2026</span> Yuliana Ituyan Angulo · Cali, Colombia</footer>
+</main>
+
+<script>
+  (function () {
+    var root = document.documentElement;
+    root.classList.add("js");
+
+    // language
+    function setLang(l) {
+      root.setAttribute("data-lang", l);
+      root.setAttribute("lang", l);
+      try { localStorage.setItem("lang", l); } catch (e) {}
+      startRotator();
+    }
+    var saved = null;
+    try { saved = localStorage.getItem("lang"); } catch (e) {}
+    var initial = saved || ((navigator.language || "en").toLowerCase().indexOf("es") === 0 ? "es" : "en");
+
+    // rotating words
+    var WORDS = {
+      en: ["looks out for people", "runs on tiny devices", "protects privacy", "supports well-being"],
+      es: ["cuida a las personas", "corre en dispositivos pequeños", "protege la privacidad", "apoya el bienestar"]
+    };
+    var idx = 0, timer = null;
+    var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    function showWord() {
+      var lang = root.getAttribute("data-lang");
+      var el = document.getElementById("word");
+      var list = WORDS[lang];
+      el.textContent = list[idx % list.length];
+      el.style.animation = "none"; void el.offsetWidth; el.style.animation = "";
+    }
+    function startRotator() {
+      clearInterval(timer);
+      idx = 0; showWord();
+      if (!reduce) timer = setInterval(function () { idx++; showWord(); }, 2600);
+    }
+
+    setLang(initial);
+    document.querySelectorAll(".lang button").forEach(function (b) {
+      b.addEventListener("click", function () { setLang(b.getAttribute("data-set")); });
+    });
+
+    // reveal on scroll
+    var els = document.querySelectorAll(".reveal");
+    if ("IntersectionObserver" in window) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
+      }, { threshold: 0.08 });
+      els.forEach(function (el) { io.observe(el); });
+    } else {
+      els.forEach(function (el) { el.classList.add("in"); });
+    }
+    document.getElementById("year").textContent = new Date().getFullYear();
+  })();
+</script>
+</body>
+</html>

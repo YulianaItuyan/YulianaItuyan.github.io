@@ -1,0 +1,22 @@
+PAGINA PERSONAL - YULIANA ITUYAN
+================================
+
+Como publicarla en GitHub Pages
+1. Entra a github.com/new y crea un repositorio PUBLICO llamado exactamente:
+   YulianaItuyan.github.io
+2. Sube TODO el contenido de esta carpeta (index.html, assets, cv y .nojekyll).
+   En la web: "Add file" > "Upload files" y arrastra los archivos.
+3. Ve a Settings > Pages. En "Source" elige "Deploy from a branch",
+   rama "main", carpeta "/ (root)" y guarda.
+4. En 1 o 2 minutos estara en: https://YulianaItuyan.github.io
+
+Antes de publicar
+- Pon tu CV final en PDF dentro de la carpeta cv/ con el nombre CV_YulianaItuyan.pdf
+  (si no, el boton "CV (PDF)" dara error 404).
+- Revisa que todos los datos sean correctos, sobre todo fechas y premios.
+- Puedes agregar tu Google Scholar u ORCID en la parte de enlaces del index.html.
+- No agregues tu telefono ni tu direccion en una pagina publica.
+
+Como editar
+- Todo el texto esta en index.html. Cada parrafo tiene dos versiones:
+  lang="en" (ingles) y lang="es" (espanol). Edita las dos.
